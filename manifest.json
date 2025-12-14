@@ -1,0 +1,36 @@
+{
+  "name": "Crescent - Student Search Engine",
+  "short_name": "Crescent",
+  "description": "Privacy-focused search engine and study platform for students",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f5f2",
+  "theme_color": "#c4a87c",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "productivity"],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "New Search",
+      "short_name": "Search",
+      "description": "Start a new search",
+      "url": "/#search",
+      "icons": []
+    },
+    {
+      "name": "My Notes",
+      "short_name": "Notes",
+      "description": "View your notes",
+      "url": "/#notes",
+      "icons": []
+    }
+  ]
+}
