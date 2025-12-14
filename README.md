@@ -1,149 +1,160 @@
-# crescent
+# 🌙 crescent — the student-first search engine
 
-## A Search Engine and Study Ecosystem for Students
+<p align="center">
+  <strong>Privacy-first • Open-source • Built for learning</strong><br>
+  A calm, ad-free search & study ecosystem for students
+</p>
 
-**Version 1.0, 2025**
+<p align="center">
+  <a href="https://github.com/CrescentDB/crescent">
+    <img src="https://img.shields.io/github/stars/CrescentDB/crescent?style=for-the-badge" />
+  </a>
+  <a href="https://github.com/CrescentDB/crescent/fork">
+    <img src="https://img.shields.io/github/forks/CrescentDB/crescent?style=for-the-badge" />
+  </a>
+  <a href="https://github.com/CrescentDB/crescent/issues">
+    <img src="https://img.shields.io/github/issues/CrescentDB/crescent?style=for-the-badge" />
+  </a>
+  <a href="https://github.com/CrescentDB/crescent/blob/main/LICENSE">
+    <img src="https://img.shields.io/badge/license-CSPL%20v3.3-blue?style=for-the-badge" />
+  </a>
+</p>
 
----
-
-## Overview
-
-crescent is a **privacy-focused, open-source search engine** designed specifically for students, researchers, and lifelong learners. It is more than just a search tool: crescent is a fully integrated learning ecosystem that helps students research, organize information, and study efficiently in a safe, distraction-free environment.
-
-By integrating **free and open educational data sources** such as Wikipedia, Wikidata, OpenLibrary, MathJS, NASA, and other public APIs, crescent enables students to explore knowledge without ads, tracking, accounts, or invasive analytics.
-
-The project is fully **open-source**, meaning anyone can inspect, modify, and extend it under the **CrescentDB Supreme Protection License (CSPL) v3.3**. crescent is built with student privacy, accessibility, and safety in mind, making it suitable for learners under 18.
-
----
-
-## Core Philosophy
-
-1. **Student-Centric**: All features are optimized for learning, homework, research, and academic projects.
-2. **Privacy First**: crescent does **not collect personal data**, track users, or use third-party analytics.
-3. **Open-Source Freedom**: Anyone can study, modify, or contribute to the codebase under the CSPL license.
-4. **Seamless Integration**: Search, references, notes, and study tools live in one interface to reduce context switching.
-5. **Accessible and Safe**: No ads, no tracking, and a clean interface designed for students of all ages.
-
----
-
-## Key Features
-
-### Search & Research
-
-* **Multi-Source Search**: Access Wikipedia, Wikidata, OpenLibrary, NASA datasets, and other free educational APIs.
-* **Fast Reference Lookups**: Retrieve definitions, formulas, summaries, and factual information instantly.
-* **Topic Aggregation**: Combine results from multiple sources into a single research view.
-* **Smart Suggestions**: Discover related topics and concepts to support deeper learning.
-
-### Notes & Study Tools
-
-* **Personal Notes**: Create, edit, and organize notes alongside search results.
-* **Bookmarks & Collections**: Save articles, references, and data points for later review.
-* **Research Workspaces**: Group notes and searches by subject, topic, or project.
-* **Highlight & Annotate**: Mark key information for revision and exam preparation.
-
-### Educational Utilities
-
-* **Math Tools**: Evaluate expressions and formulas using the MathJS API.
-* **Science Resources**: Access astronomy imagery and public scientific datasets via NASA APIs.
-* **Dictionary & Language Tools**: Look up definitions, meanings, and vocabulary using free Dictionary APIs.
-* **Weather & Climate Data**: Study weather patterns and climate data using OpenWeatherMap’s free tier.
-* **Current Events**: Research recent news topics using open-access news APIs.
-
-### Customization & Extensibility
-
-* **API-Friendly Architecture**: Designed to support additional free and open educational APIs.
-* **Open Source**: Developers can add features, improve performance, or extend tools.
-* **Student Extensions**: Create scripts or plugins tailored for educational workflows.
+<p align="center">
+  <img src="https://img.shields.io/badge/ads-none-success?style=flat-square" />
+  <img src="https://img.shields.io/badge/tracking-zero-success?style=flat-square" />
+  <img src="https://img.shields.io/badge/accounts-not%20required-success?style=flat-square" />
+  <img src="https://img.shields.io/badge/under--18-safe-success?style=flat-square" />
+</p>
 
 ---
 
-## Supported APIs (Free & Open)
+## 🚀 What is crescent?
 
-| API Name           | Purpose                         | Example Use Case                           |
-| ------------------ | ------------------------------- | ------------------------------------------ |
-| Wikipedia API      | Encyclopedia articles           | Research historical or scientific topics   |
-| Wikidata API       | Structured knowledge            | Build charts, timelines, or data summaries |
-| OpenLibrary API    | Books and authors               | Find books for assignments or research     |
-| NASA APIs          | Astronomy and science resources | Access space imagery and datasets          |
-| OpenWeatherMap API | Weather and climate data        | Study climate patterns                     |
-| MathJS API         | Math expression evaluation      | Calculate formulas or verify solutions     |
-| Dictionary API     | Definitions and vocabulary      | Language learning                          |
-| NewsAPI            | Current events                  | Research recent news topics                |
+**crescent** is a **privacy-first, open-source search engine and study ecosystem** designed specifically for students.
 
-> All listed APIs provide **free access tiers** suitable for educational and non-commercial use.
+It replaces noisy, ad-driven search engines with a **calm learning environment** where students can:
 
----
+- Research topics from trusted educational sources  
+- Take notes alongside results  
+- Organize study material  
+- Learn without being tracked, distracted, or profiled  
 
-## Usage Guide
+No ads.  
+No accounts.  
+No data collection.
 
-1. **Open crescent** in your browser.
-2. **Enter a query** to search across multiple educational sources.
-3. **Create notes** and annotate important information.
-4. **Organize research** by topic, subject, or project.
-5. **Use study tools** such as math evaluation, references, or datasets.
-6. **Review or export** saved notes and research.
+Just learning.
 
 ---
 
-## Student Benefits
+## 🌟 Why crescent exists
 
-* Centralized research and study workflow.
-* No ads, tracking, or data collection.
-* Works across devices (desktop, tablet, mobile).
-* Uses trusted, open educational data sources.
-* Designed to be safe for under-18 users.
+Modern search engines are optimized for:
+- ads
+- engagement
+- profiling users
 
----
+crescent is optimized for:
+- **understanding**
+- **focus**
+- **students**
 
-## Contributing
-
-crescent is **fully open-source** and welcomes contributions from students, educators, and developers.
-
-Ways to contribute:
-
-* Add or improve free educational API integrations.
-* Suggest or implement new study or research features.
-* Fix bugs, optimize performance, or improve accessibility.
-* Share documentation, workflows, or templates for students.
-
-All contributions are licensed under the **CrescentDB Supreme Protection License (CSPL) v3.3, 2025**.
+It is built to be safe for learners of all ages, including under 18, and to respect privacy by default.
 
 ---
 
-## Code of Conduct
+## ✨ Features at a glance
 
-* Use crescent responsibly and ethically.
-* Do not use the platform for illegal, unsafe, or harmful activities.
-* Respect user privacy and the educational focus of the platform.
+### 🔍 Smart Educational Search
+- Wikipedia, Wikidata, OpenLibrary, NASA & more
+- Unified results across multiple sources
+- Instant references, summaries & facts
+
+### 📝 Built-in Study Tools
+- Notes linked to searches
+- Bookmarks & collections
+- Topic-based research workspaces
+- Highlight & annotate key information
+
+### 🧠 Learning Utilities
+- Math expression evaluation (MathJS)
+- Science & astronomy datasets (NASA)
+- Dictionary & vocabulary tools
+- Weather & climate data
+- Current events research
+
+### 🧩 Fully Open & Extensible
+- API-friendly architecture
+- Easy to add free educational sources
+- Designed for student-built extensions
 
 ---
 
-## License
+## 🔌 Free & Open APIs Used
 
-Copyright 2025 **luvaary**
+| API | What it provides |
+|----|------------------|
+| Wikipedia | Encyclopedia articles |
+| Wikidata | Structured knowledge |
+| OpenLibrary | Books & authors |
+| NASA APIs | Science & space data |
+| MathJS | Math evaluation |
+| Dictionary APIs | Vocabulary |
+| OpenWeatherMap | Climate data |
+| News APIs | Current events |
 
-Licensed under the **CrescentDB Supreme Protection License (CSPL) Version 3.3, 2025**.
+> crescent only uses **free and open-access data sources**.
 
 ---
 
-## Appendix: Student Workflow Examples
+## 🎓 Perfect for
 
-1. **Research Paper Workflow**
+- Students & self-learners  
+- Homework & assignments  
+- Research projects  
+- Exam revision  
+- Privacy-conscious users  
 
-   * Search topics using Wikipedia and OpenLibrary.
-   * Organize sources and notes by subject.
-   * Review key points and references.
+---
 
-2. **Homework Workflow**
+## 🤝 Contributing (easy!)
 
-   * Use MathJS for calculations and checks.
-   * Reference open educational resources.
-   * Save worked solutions for revision.
+You don’t need to be an expert to contribute.
 
-3. **Exam Study Workflow**
+Ways to help:
+- Improve UI or accessibility
+- Add a new educational API
+- Fix bugs or performance issues
+- Improve documentation
+- Suggest features students actually need
 
-   * Look up definitions and concepts.
-   * Bookmark important references.
-   * Organize material by chapter or topic.
+All contributions are welcome ❤️
 
+---
+
+## 🛡 Privacy & Safety
+
+- No trackers  
+- No analytics  
+- No ads  
+- No accounts  
+- No dark patterns  
+
+crescent is designed to be **safe, ethical, and student-friendly**.
+
+---
+
+## 📄 License
+
+© 2025 **luvaary**  
+Licensed under the **CrescentDB Supreme Protection License (CSPL) v3.3**
+
+---
+
+## ⭐ Star the project
+
+If you believe students deserve better tools,  
+**please consider starring this repository** — it helps crescent reach more learners.
+
+🌙  
