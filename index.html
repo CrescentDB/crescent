@@ -39,6 +39,8 @@
       <li><a href="https://github.com" target="_blank">GitHub</a></li>
       <li><a href="#about">About</a></li>
     </ul>
+    
+    <button class="dark-mode-toggle" id="darkModeToggle">🌙</button>
   </nav>
 
   <div class="spotify-tab">
@@ -48,6 +50,37 @@
       </svg>
       <span>MUSIC</span>
     </button>
+  </div>
+
+  <div class="notes-panel" id="notesPanel">
+    <h3>Notes</h3>
+    <textarea id="notesTextarea" placeholder="Take notes while you study..."></textarea>
+    <div class="notes-actions">
+      <button onclick="saveNotes()">Save</button>
+      <button onclick="clearNotes()">Clear</button>
+    </div>
+  </div>
+
+  <div class="timer-widget" id="timerWidget">
+    <h3>Study Timer</h3>
+    <div class="timer-display" id="timerDisplay">25:00</div>
+    <div class="timer-controls">
+      <button id="startTimer">Start</button>
+      <button id="stopTimer">Stop</button>
+      <button id="resetTimer">Reset</button>
+    </div>
+  </div>
+
+  <div class="history-panel" id="historyPanel">
+    <h3>Search History</h3>
+    <div id="historyList"></div>
+    <button class="clear-history-btn" onclick="clearHistory()">Clear History</button>
+  </div>
+
+  <div class="bookmarks-panel" id="bookmarksPanel">
+    <h3>Bookmarks</h3>
+    <div id="bookmarksList"></div>
+    <button class="clear-bookmarks-btn" onclick="clearBookmarks()">Clear Bookmarks</button>
   </div>
 
   <div class="spotify-panel" id="spotifyPanel">
