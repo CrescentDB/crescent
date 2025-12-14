@@ -20,7 +20,12 @@ export function addFlashcard() {
     id: Date.now(),
     front: front,
     back: back,
-    created: new Date().toISOString()
+    created: new Date().toISOString(),
+    reviewCount: 0,
+    lastReviewed: null,
+    nextReview: Date.now(),
+    interval: 1,
+    easeFactor: 2.5
   };
   
   flashcards.push(card);
@@ -31,6 +36,35 @@ export function addFlashcard() {
   
   updateFlashcardDisplay();
   showNotification('Flashcard added!');
+}
+
+export function rateCard(rating) {
+  if (flashcards.length === 0) return;
+  
+  const card = flashcards[currentCardIndex];
+  
+  card.reviewCount++;
+  card.lastReviewed = Date.now();
+  
+  if (rating === 'hard') {
+    card.interval = Math.max(1, Math.floor(card.interval * 0.5));
+    card.easeFactor = Math.max(1.3, card.easeFactor - 0.2);
+  } else if (rating === 'good') {
+    card.interval = Math.ceil(card.interval * card.easeFactor);
+  } else if (rating === 'easy') {
+    card.interval = Math.ceil(card.interval * card.easeFactor * 1.3);
+    card.easeFactor = Math.min(2.5, card.easeFactor + 0.1);
+  }
+  
+  card.nextReview = Date.now() + (card.interval * 86400000);
+  
+  saveFlashcards();
+  nextCard();
+}
+
+export function getDueCards() {
+  const now = Date.now();
+  return flashcards.filter(card => card.nextReview <= now);
 }
 
 export function deleteFlashcard(id) {
