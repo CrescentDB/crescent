@@ -45,6 +45,13 @@
     min-width: 220px;
   }
   
+  .calculator-widget {
+    bottom: 20px;
+    left: 20px;
+    transform: none;
+    min-width: 220px;
+  }
+  
   nav {
     padding: 1.25rem 2rem;
   }
