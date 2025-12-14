@@ -41,7 +41,11 @@
       <li><a href="#about">About</a></li>
     </ul>
     
-    <button class="dark-mode-toggle" id="darkModeToggle">🌙</button>
+    <div class="nav-actions">
+      <button class="nav-btn" id="shortcutsHelp" title="Keyboard Shortcuts (?)">⌨️</button>
+      <button class="nav-btn" id="focusModeToggle" title="Focus Mode">🎯</button>
+      <button class="dark-mode-toggle" id="darkModeToggle">🌙</button>
+    </div>
   </nav>
 
   <div class="spotify-tab">
@@ -58,6 +62,7 @@
     <textarea id="notesTextarea" placeholder="Take notes while you study..."></textarea>
     <div class="notes-actions">
       <button onclick="saveNotes()">Save</button>
+      <button onclick="exportNotes()">Export</button>
       <button onclick="clearNotes()">Clear</button>
     </div>
   </div>
@@ -92,6 +97,32 @@
     <h3>Bookmarks</h3>
     <div id="bookmarksList"></div>
     <button class="clear-bookmarks-btn" onclick="clearBookmarks()">Clear Bookmarks</button>
+  </div>
+
+  <div class="flashcards-panel" id="flashcardsPanel">
+    <h3>Flashcards</h3>
+    
+    <div class="flashcard-viewer">
+      <div class="flashcard-display" id="flashcardDisplay" onclick="flipCard()">
+        <div class="flashcard-content" id="flashcardContent">
+          No flashcards yet. Create one below!
+        </div>
+      </div>
+      <div class="flashcard-counter" id="flashcardCounter">0 / 0</div>
+      <div class="flashcard-controls">
+        <button onclick="prevCard()">←</button>
+        <button onclick="flipCard()">Flip</button>
+        <button onclick="nextCard()">→</button>
+      </div>
+    </div>
+    
+    <div class="flashcard-creator">
+      <input type="text" id="flashcardFront" placeholder="Front (Question)">
+      <input type="text" id="flashcardBack" placeholder="Back (Answer)">
+      <button onclick="addFlashcard()">Add Card</button>
+    </div>
+    
+    <div class="flashcards-list" id="flashcardsList"></div>
   </div>
 
   <div class="spotify-panel" id="spotifyPanel">
@@ -137,6 +168,9 @@
         <button class="api-chip" data-api="nasa">NASA</button>
         <button class="api-chip" data-api="weather">Weather</button>
         <button class="api-chip" data-api="news">News</button>
+        <button class="api-chip" data-api="arxiv">arXiv</button>
+        <button class="api-chip" data-api="github">GitHub</button>
+        <button class="api-chip" data-api="youtube">YouTube</button>
       </div>
     </div>
 
