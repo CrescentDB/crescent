@@ -8,7 +8,7 @@ export const apiConfigs = {
           `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(query)}`
         );
         if (!response.ok) return [];
-
+        
         const data = await response.json();
         return [{
           title: data.title,
@@ -24,7 +24,7 @@ export const apiConfigs = {
       }
     }
   },
-
+  
   openlib: {
     name: 'Open Library',
     class: 'source-openlib',
@@ -34,7 +34,7 @@ export const apiConfigs = {
           `https://openlibrary.org/search.json?q=${encodeURIComponent(query)}&limit=5`
         );
         const data = await response.json();
-
+        
         return (data.docs || []).map(book => ({
           title: book.title,
           excerpt: `By ${book.author_name?.join(', ') || 'Unknown'} · First published ${book.first_publish_year || 'N/A'}`,
@@ -49,7 +49,7 @@ export const apiConfigs = {
       }
     }
   },
-
+  
   dictionary: {
     name: 'Dictionary',
     class: 'source-dictionary',
@@ -59,11 +59,13 @@ export const apiConfigs = {
           `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(query)}`
         );
         if (!response.ok) return [];
-
+        
         const data = await response.json();
         return data.map(entry => ({
           title: entry.word,
-          excerpt: entry.meanings?.map(m => `(${m.partOfSpeech}) ${m.definitions?.[0]?.definition}`).join(' · ') || '',
+          excerpt: entry.meanings?.map(m => 
+            `(${m.partOfSpeech}) ${m.definitions?.[0]?.definition}`
+          ).join(' · ') || '',
           source: 'Dictionary',
           sourceClass: 'source-dictionary',
           url: entry.sourceUrls?.[0],
@@ -75,7 +77,7 @@ export const apiConfigs = {
       }
     }
   },
-
+  
   nasa: {
     name: 'NASA',
     class: 'source-nasa',
@@ -85,7 +87,7 @@ export const apiConfigs = {
           `https://images-api.nasa.gov/search?q=${encodeURIComponent(query)}&media_type=image`
         );
         if (!response.ok) return [];
-
+        
         const data = await response.json();
         return (data.collection?.items || []).slice(0, 5).map(item => ({
           title: item.data?.[0]?.title || 'Untitled',
@@ -97,6 +99,61 @@ export const apiConfigs = {
         }));
       } catch (error) {
         console.error('NASA API error:', error);
+        return [];
+      }
+    }
+  },
+  
+  weather: {
+    name: 'Weather',
+    class: 'source-weather',
+    search: async (query) => {
+      try {
+        const response = await fetch(
+          `https://wttr.in/${encodeURIComponent(query)}?format=j1`
+        );
+        if (!response.ok) return [];
+        
+        const data = await response.json();
+        const current = data.current_condition[0];
+        const location = data.nearest_area[0];
+        
+        return [{
+          title: `Weather in ${location.areaName[0].value}, ${location.country[0].value}`,
+          excerpt: `${current.temp_C}°C, ${current.weatherDesc[0].value}. Feels like ${current.FeelsLikeC}°C. Humidity: ${current.humidity}%, Wind: ${current.windspeedKmph}km/h`,
+          source: 'Weather',
+          sourceClass: 'source-weather',
+          url: `https://wttr.in/${encodeURIComponent(query)}`,
+          meta: { type: 'Weather' }
+        }];
+      } catch (error) {
+        console.error('Weather API error:', error);
+        return [];
+      }
+    }
+  },
+  
+  news: {
+    name: 'News',
+    class: 'source-news',
+    search: async (query) => {
+      try {
+        const response = await fetch(
+          `https://hn.algolia.com/api/v1/search?query=${encodeURIComponent(query)}&tags=story&hitsPerPage=5`
+        );
+        if (!response.ok) return [];
+        
+        const data = await response.json();
+        return data.hits.map(hit => ({
+          title: hit.title,
+          excerpt: hit.author ? `By ${hit.author} · ${hit.points} points · ${hit.num_comments} comments` : 'Recent news story',
+          source: 'Hacker News',
+          sourceClass: 'source-news',
+          url: hit.url || `https://news.ycombinator.com/item?id=${hit.objectID}`,
+          meta: { type: 'News' }
+        }));
+      } catch (error) {
+        console.error('News API error:', error);
         return [];
       }
     }
@@ -136,9 +193,11 @@ export async function performSearch() {
 
   try {
     let results = [];
-
+    
     if (selectedAPI === 'all') {
-      const promises = Object.values(apiConfigs).map(api => api.search(query).catch(() => []));
+      const promises = Object.values(apiConfigs).map(api => 
+        api.search(query).catch(() => [])
+      );
       const allResults = await Promise.all(promises);
       results = allResults.flat();
     } else if (apiConfigs[selectedAPI]) {
@@ -149,9 +208,11 @@ export async function performSearch() {
     resultsCount.textContent = `${results.length} result${results.length !== 1 ? 's' : ''}`;
 
     if (results.length === 0) {
-      resultsGrid.innerHTML = `<div style="text-align: center; padding: 2rem; color: var(--text-muted);">
-        <p>No results found. Try a different search term or source.</p>
-      </div>`;
+      resultsGrid.innerHTML = `
+        <div style="text-align: center; padding: 2rem; color: var(--text-muted);">
+          <p>No results found. Try a different search term or source.</p>
+        </div>
+      `;
       return;
     }
 
@@ -178,15 +239,17 @@ export async function performSearch() {
       };
       resultsGrid.appendChild(card);
     });
-
+    
     if (typeof window.addToSearchHistory === 'function') {
       window.addToSearchHistory(query, results.length);
     }
 
   } catch (error) {
     loading.classList.remove('active');
-    resultsGrid.innerHTML = `<div style="text-align: center; padding: 2rem; color: var(--text-muted);">
-      <p>Something went wrong. Please try again.</p>
-    </div>`;
+    resultsGrid.innerHTML = `
+      <div style="text-align: center; padding: 2rem; color: var(--text-muted);">
+        <p>Something went wrong. Please try again.</p>
+      </div>
+    `;
   }
 }
