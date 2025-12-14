@@ -1,385 +1,362 @@
-.result-meta span {
-  background: var(--bg-secondary);
-  padding: 0.375rem 0.875rem;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-}
-
-.result-actions {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  display: flex;
-  gap: 0.5rem;
-  z-index: 2;
-}
-
-.bookmark-btn,
-.rea.search-container {
-  width: 100%;
-  max-width: 750px;
-  padding: 0 2rem;
-  margin-top: 2.5rem;
-  animation: fadeInUp 1s ease-out 0.6s both;
-}
-
-.search-box {
-  position: relative;
-  width: 100%;
-}
-
-.search-input {
-  width: 100%;
-  padding: 1.5rem 1.75rem;
-  padding-right: 4rem;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 1.0625rem;
-  border: 2px solid var(--border);
-  border-radius: 20px;
-  background: var(--bg-card);
-  backdrop-filter: blur(20px) saturate(180%);
-  color: var(--text-primary);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: var(--shadow);
-  outline: none;
-}
-
-.search-input::placeholder {
-  color: var(--text-muted);
-  font-weight: 300;
-}
-
-.search-input:focus {
-  border-color: var(--accent);
-  box-shadow: var(--shadow-lg), 0 0 0 4px rgba(196, 168, 124, 0.1);
-  transform: translateY(-2px);
-}
-
-.search-btn {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
-  border: none;
-  padding: 0.875rem;
-  cursor: pointer;
-  color: white;
-  transition: var(--transition);
-  border-radius: 14px;
-  box-shadow: 0 4px 12px rgba(196, 168, 124, 0.3);
-}
-
-.search-btn:hover {
-  transform: translateY(-50%) scale(1.08);
-  box-shadow: 0 6px 20px rgba(196, 168, 124, 0.5);
-}
-
-.search-btn:active {
-  transform: translateY(-50%) scale(0.95);
-}
-
-.search-btn svg {
-  width: 22px;
-  height: 22px;
-  display: block;
-}
-
-.api-categories {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.75rem;
-  margin-top: 2rem;
-  animation: fadeInUp 1s ease-out 0.8s both;
-}
-
-.api-chip {
-  padding: 0.625rem 1.25rem;
-  font-size: 0.8125rem;
-  border: 2px solid var(--border);
-  border-radius: 24px;
-  background: var(--bg-card);
-  backdrop-filter: blur(16px);
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: var(--transition);
-  letter-spacing: 0.03em;
-  font-weight: 500;
-  box-shadow: var(--shadow-sm);
-  position: relative;
-  overflow: hidden;
-}
-
-.api-chip::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, var(--accent-soft), var(--accent));
-  opacity: 0;
-  transition: var(--transition);
-}
-
-.api-chip span {
-  position: relative;
-  z-index: 1;
-}
-
-.api-chip:hover {
-  background: var(--accent-soft);
-  border-color: var(--accent);
-  color: var(--text-primary);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow);
-}
-
-.api-chip:hover::before {
-  opacity: 0.15;
-}
-
-.api-chip.active {
-  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
-  border-color: var(--accent);
-  color: white;
-  box-shadow: 0 6px 20px rgba(196, 168, 124, 0.4);
-  transform: translateY(-2px);
-}
-
-.api-chip.active::before {
-  opacity: 0;
-}
-
-.api-chip:active {
-  transform: translateY(0) scale(0.97);
-}
-
-.results-section {
-  width: 100%;
-  max-width: 950px;
-  padding: 2.5rem 2rem;
-  margin-top: 2rem;
-  display: none;
-  animation: fadeInUp 0.6s ease-out;
-}
-
-.results-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-  padding-bottom: 1.25rem;
-  border-bottom: 2px solid var(--border);
-}
-
-.results-header h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.5rem;
-  font-weight: 400;
-  color: var(--text-secondary);
-  letter-spacing: 0.05em;
-}
-
-.results-count {
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  font-weight: 500;
-  background: var(--bg-card);
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  border: 1px solid var(--border);
-}
-
-.results-grid {
-  display: grid;
-  gap: 1.5rem;
-}
-
-.result-card {
-  background: var(--bg-card);
-  border: 2px solid var(--border);
-  border-radius: 20px;
-  padding: 2rem;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-  animation: slideUpFade 0.6s ease-out backwards;
-  position: relative;
-  backdrop-filter: blur(20px);
-  box-shadow: var(--shadow-sm);
-  overflow: hidden;
-}
-
-.result-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, var(--accent-soft), transparent);
-  opacity: 0;
-  transition: var(--transition);
-}
-
-.result-card:hover {
-  transform: translateY(-6px) scale(1.01);
-  box-shadow: var(--shadow-hover);
-  border-color: var(--accent-soft);
-}
-
-.result-card:hover::before {
-  opacity: 0.08;
-}
-
-.result-card:active {
-  transform: translateY(-2px) scale(0.99);
-}
-
-@keyframes slideUpFade {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
+export const apiConfigs = {
+  wikipedia: {
+    name: 'Wikipedia',
+    class: 'source-wikipedia',
+    search: async (query) => {
+      try {
+        const response = await fetch(
+          `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(query)}`
+        );
+        if (!response.ok) return [];
+        
+        const data = await response.json();
+        return [{
+          title: data.title,
+          excerpt: data.extract,
+          source: 'Wikipedia',
+          sourceClass: 'source-wikipedia',
+          url: data.content_urls?.desktop?.page,
+          meta: { type: 'Article' }
+        }];
+      } catch (error) {
+        console.error('Wikipedia API error:', error);
+        return [];
+      }
+    }
+  },
+  
+  openlib: {
+    name: 'Open Library',
+    class: 'source-openlib',
+    search: async (query) => {
+      try {
+        const response = await fetch(
+          `https://openlibrary.org/search.json?q=${encodeURIComponent(query)}&limit=5`
+        );
+        const data = await response.json();
+        
+        return (data.docs || []).map(book => ({
+          title: book.title,
+          excerpt: `By ${book.author_name?.join(', ') || 'Unknown'} · First published ${book.first_publish_year || 'N/A'}`,
+          source: 'Open Library',
+          sourceClass: 'source-openlib',
+          url: `https://openlibrary.org${book.key}`,
+          meta: { type: 'Book' }
+        }));
+      } catch (error) {
+        console.error('Open Library API error:', error);
+        return [];
+      }
+    }
+  },
+  
+  dictionary: {
+    name: 'Dictionary',
+    class: 'source-dictionary',
+    search: async (query) => {
+      try {
+        const response = await fetch(
+          `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(query)}`
+        );
+        if (!response.ok) return [];
+        
+        const data = await response.json();
+        return data.map(entry => ({
+          title: entry.word,
+          excerpt: entry.meanings?.map(m => 
+            `(${m.partOfSpeech}) ${m.definitions?.[0]?.definition}`
+          ).join(' · ') || '',
+          source: 'Dictionary',
+          sourceClass: 'source-dictionary',
+          url: entry.sourceUrls?.[0],
+          meta: { type: 'Definition', phonetic: entry.phonetic }
+        }));
+      } catch (error) {
+        console.error('Dictionary API error:', error);
+        return [];
+      }
+    }
+  },
+  
+  nasa: {
+    name: 'NASA',
+    class: 'source-nasa',
+    search: async (query) => {
+      try {
+        const response = await fetch(
+          `https://images-api.nasa.gov/search?q=${encodeURIComponent(query)}&media_type=image`
+        );
+        if (!response.ok) return [];
+        
+        const data = await response.json();
+        return (data.collection?.items || []).slice(0, 5).map(item => ({
+          title: item.data?.[0]?.title || 'Untitled',
+          excerpt: item.data?.[0]?.description?.substring(0, 200) || '',
+          source: 'NASA',
+          sourceClass: 'source-nasa',
+          url: item.links?.[0]?.href,
+          meta: { type: 'Image', date: item.data?.[0]?.date_created?.split('T')[0] }
+        }));
+      } catch (error) {
+        console.error('NASA API error:', error);
+        return [];
+      }
+    }
+  },
+  
+  weather: {
+    name: 'Weather',
+    class: 'source-weather',
+    search: async (query) => {
+      try {
+        const response = await fetch(
+          `https://wttr.in/${encodeURIComponent(query)}?format=j1`
+        );
+        if (!response.ok) return [];
+        
+        const data = await response.json();
+        const current = data.current_condition[0];
+        const location = data.nearest_area[0];
+        
+        return [{
+          title: `Weather in ${location.areaName[0].value}, ${location.country[0].value}`,
+          excerpt: `${current.temp_C}°C, ${current.weatherDesc[0].value}. Feels like ${current.FeelsLikeC}°C. Humidity: ${current.humidity}%, Wind: ${current.windspeedKmph}km/h`,
+          source: 'Weather',
+          sourceClass: 'source-weather',
+          url: `https://wttr.in/${encodeURIComponent(query)}`,
+          meta: { type: 'Weather' }
+        }];
+      } catch (error) {
+        console.error('Weather API error:', error);
+        return [];
+      }
+    }
+  },
+  
+  news: {
+    name: 'News',
+    class: 'source-news',
+    search: async (query) => {
+      try {
+        const response = await fetch(
+          `https://hn.algolia.com/api/v1/search?query=${encodeURIComponent(query)}&tags=story&hitsPerPage=5`
+        );
+        if (!response.ok) return [];
+        
+        const data = await response.json();
+        return data.hits.map(hit => ({
+          title: hit.title,
+          excerpt: hit.author ? `By ${hit.author} · ${hit.points} points · ${hit.num_comments} comments` : 'Recent news story',
+          source: 'Hacker News',
+          sourceClass: 'source-news',
+          url: hit.url || `https://news.ycombinator.com/item?id=${hit.objectID}`,
+          meta: { type: 'News' }
+        }));
+      } catch (error) {
+        console.error('News API error:', error);
+        return [];
+      }
+    }
+  },
+  
+  arxiv: {
+    name: 'arXiv',
+    class: 'source-arxiv',
+    search: async (query) => {
+      try {
+        const response = await fetch(
+          `https://export.arxiv.org/api/query?search_query=all:${encodeURIComponent(query)}&start=0&max_results=5`
+        );
+        if (!response.ok) return [];
+        
+        const text = await response.text();
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(text, 'text/xml');
+        const entries = xml.querySelectorAll('entry');
+        
+        return Array.from(entries).map(entry => ({
+          title: entry.querySelector('title')?.textContent?.trim() || 'Untitled',
+          excerpt: entry.querySelector('summary')?.textContent?.trim()?.substring(0, 200) || '',
+          source: 'arXiv',
+          sourceClass: 'source-arxiv',
+          url: entry.querySelector('id')?.textContent?.trim(),
+          meta: { 
+            type: 'Research Paper',
+            authors: entry.querySelector('author name')?.textContent?.trim()
+          }
+        }));
+      } catch (error) {
+        console.error('arXiv API error:', error);
+        return [];
+      }
+    }
+  },
+  
+  github: {
+    name: 'GitHub',
+    class: 'source-github',
+    search: async (query) => {
+      try {
+        const response = await fetch(
+          `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}&sort=stars&per_page=5`
+        );
+        if (!response.ok) return [];
+        
+        const data = await response.json();
+        return data.items.map(repo => ({
+          title: repo.full_name,
+          excerpt: repo.description || 'No description available',
+          source: 'GitHub',
+          sourceClass: 'source-github',
+          url: repo.html_url,
+          meta: { 
+            type: 'Repository',
+            stars: `⭐ ${repo.stargazers_count}`,
+            language: repo.language
+          }
+        }));
+      } catch (error) {
+        console.error('GitHub API error:', error);
+        return [];
+      }
+    }
+  },
+  
+  youtube: {
+    name: 'YouTube',
+    class: 'source-youtube',
+    search: async (query) => {
+      try {
+        const response = await fetch(
+          `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`
+        );
+        const text = await response.text();
+        
+        const scriptMatch = text.match(/var ytInitialData = ({.+?});/);
+        if (!scriptMatch) return [];
+        
+        const data = JSON.parse(scriptMatch[1]);
+        const contents = data?.contents?.twoColumnSearchResultsRenderer?.primaryContents?.sectionListRenderer?.contents?.[0]?.itemSectionRenderer?.contents || [];
+        
+        return contents.slice(0, 5).filter(item => item.videoRenderer).map(item => {
+          const video = item.videoRenderer;
+          return {
+            title: video.title?.runs?.[0]?.text || 'Untitled',
+            excerpt: video.descriptionSnippet?.runs?.map(r => r.text).join('') || 'No description',
+            source: 'YouTube',
+            sourceClass: 'source-youtube',
+            url: `https://www.youtube.com/watch?v=${video.videoId}`,
+            meta: { 
+              type: 'Video',
+              views: video.viewCountText?.simpleText
+            }
+          };
+        });
+      } catch (error) {
+        console.error('YouTube API error:', error);
+        return [];
+      }
+    }
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+};
+
+let selectedAPI = 'all';
+
+export function initSearch() {
+  document.querySelectorAll('.api-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.api-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      selectedAPI = chip.dataset.api;
+    });
+  });
+
+  document.getElementById('searchInput').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') performSearch();
+  });
 }
 
-.result-source {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.625rem;
-  font-size: 0.6875rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-bottom: 1rem;
-  font-weight: 600;
-  position: relative;
-  z-index: 1;
-}
+export async function performSearch() {
+  const query = document.getElementById('searchInput').value.trim();
+  if (!query) return;
 
-.source-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  box-shadow: 0 2px 8px currentColor;
-  animation: pulse 2s ease-in-out infinite;
-}
+  const resultsSection = document.getElementById('resultsSection');
+  const emptyState = document.getElementById('emptyState');
+  const loading = document.getElementById('loading');
+  const resultsGrid = document.getElementById('resultsGrid');
+  const resultsCount = document.getElementById('resultsCount');
 
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.7;
-    transform: scale(1.15);
-  }
-}
+  resultsSection.style.display = 'block';
+  emptyState.style.display = 'none';
+  loading.classList.add('active');
+  resultsGrid.innerHTML = '';
 
-.source-wikipedia { background: #636363; }
-.source-openlib { background: #d4a373; }
-.source-dictionary { background: #81c784; }
-.source-nasa { background: #0b3d91; }
-.source-weather { background: #4fc3f7; }
-.source-news { background: #e57373; }
-.source-arxiv { background: #b31b1b; }
-.source-github { background: #333333; }
-.source-youtube { background: #ff0000; }
+  try {
+    let results = [];
+    
+    if (selectedAPI === 'all') {
+      const promises = Object.values(apiConfigs).map(api => 
+        api.search(query).catch(() => [])
+      );
+      const allResults = await Promise.all(promises);
+      results = allResults.flat();
+    } else if (apiConfigs[selectedAPI]) {
+      results = await apiConfigs[selectedAPI].search(query);
+    }
 
-.result-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: var(--text-primary);
-  margin-bottom: 0.75rem;
-  line-height: 1.4;
-  letter-spacing: 0.02em;
-  position: relative;
-  z-index: 1;
-}
+    loading.classList.remove('active');
+    resultsCount.textContent = `${results.length} result${results.length !== 1 ? 's' : ''}`;
 
-.result-excerpt {
-  font-size: 0.9375rem;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  position: relative;
-  z-index: 1;
-}
+    if (results.length === 0) {
+      resultsGrid.innerHTML = `
+        <div style="text-align: center; padding: 2rem; color: var(--text-muted);">
+          <p>No results found. Try a different search term or source.</p>
+        </div>
+      `;
+      return;
+    }
 
-.result-meta {
-  display: flex;
-  gap: 1.25rem;
-  margin-top: 1.25rem;
-  font-size: 0.8125rem;
-  color: var(--text-muted);
-  font-weight: 500;
-  position: relative;
-  z-index: 1;
-}
+    results.forEach((result, index) => {
+      const card = document.createElement('div');
+      card.className = 'result-card';
+      card.style.animationDelay = `${index * 0.1}s`;
+      card.innerHTML = `
+        <div class="result-source">
+          <span class="source-dot ${result.sourceClass}"></span>
+          ${result.source}
+        </div>
+        <h3 class="result-title">${result.title}</h3>
+        <p class="result-excerpt">${result.excerpt}</p>
+        <div class="result-meta">
+          <span>${result.meta?.type || 'Result'}</span>
+          ${result.meta?.phonetic ? `<span>${result.meta.phonetic}</span>` : ''}
+          ${result.meta?.date ? `<span>${result.meta.date}</span>` : ''}
+        </div>
+        <div class="result-actions">
+          <button class="bookmark-btn" onclick="event.stopPropagation(); window.addBookmark(${JSON.stringify(result).replace(/"/g, '&quot;')})" title="Bookmark">⭐</button>
+          <button class="reading-btn" onclick="event.stopPropagation(); window.addToReadingList(${JSON.stringify(result).replace(/"/g, '&quot;')})" title="Add to Reading List">📖</button>
+        </div>
+      `;
+      card.onclick = () => {
+        if (result.url) window.open(result.url, '_blank');
+      };
+      resultsGrid.appendChild(card);
+    });
+    
+    if (typeof window.addToSearchHistory === 'function') {
+      window.addToSearchHistory(query, results.length);
+    }
+    
+    if (typeof window.trackSearch === 'function') {
+      window.trackSearch(selectedAPI);
+    }
 
-.result-meta span {
-  background: var(--bg-secondary);
-  padding: 0.375rem 0.875rem;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-}
-
-.bookmark-btn {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  background: var(--bg-secondary);
-  border: 2px solid var(--border);
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 1.125rem;
-  transition: var(--transition);
-  z-index: 2;
-  box-shadow: var(--shadow-sm);
-}
-
-.bookmark-btn:hover {
-  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
-  border-color: var(--accent);
-  transform: scale(1.15) rotate(12deg);
-  box-shadow: 0 6px 20px rgba(196, 168, 124, 0.4);
-}
-
-.bookmark-btn:active {
-  transform: scale(1.05) rotate(0deg);
-}
-
-.loading {
-  display: none;
-  justify-content: center;
-  align-items: center;
-  padding: 4rem;
-}
-
-.loading.active {
-  display: flex;
-}
-
-.loader {
-  width: 48px;
-  height: 48px;
-  border: 3px solid var(--border);
-  border-top-color: var(--accent);
-  border-radius: 50%;
-  animation: spin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
-  box-shadow: 0 4px 12px rgba(196, 168, 124, 0.2);
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
+  } catch (error) {
+    loading.classList.remove('active');
+    resultsGrid.innerHTML = `
+      <div style="text-align: center; padding: 2rem; color: var(--text-muted);">
+        <p>Something went wrong. Please try again.</p>
+      </div>
+    `;
   }
 }
