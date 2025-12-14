@@ -4,9 +4,12 @@ export const apiConfigs = {
     class: 'source-wikipedia',
     search: async (query) => {
       try {
-        const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(query)}`);
-        if (!res.ok) return [];
-        const data = await res.json();
+        const response = await fetch(
+          https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(query)}
+        );
+        if (!response.ok) return [];
+        
+        const data = await response.json();
         return [{
           title: data.title,
           excerpt: data.extract,
@@ -15,54 +18,77 @@ export const apiConfigs = {
           url: data.content_urls?.desktop?.page,
           meta: { type: 'Article' }
         }];
-      } catch { return []; }
+      } catch (error) {
+        console.error('Wikipedia API error:', error);
+        return [];
+      }
     }
   },
+  
   openlib: {
     name: 'Open Library',
     class: 'source-openlib',
     search: async (query) => {
       try {
-        const res = await fetch(`https://openlibrary.org/search.json?q=${encodeURIComponent(query)}&limit=5`);
-        const data = await res.json();
+        const response = await fetch(
+          https://openlibrary.org/search.json?q=${encodeURIComponent(query)}&limit=5
+        );
+        const data = await response.json();
+        
         return (data.docs || []).map(book => ({
           title: book.title,
-          excerpt: `By ${book.author_name?.join(', ') || 'Unknown'} · First published ${book.first_publish_year || 'N/A'}`,
+          excerpt: By ${book.author_name?.join(', ') || 'Unknown'} · First published ${book.first_publish_year || 'N/A'},
           source: 'Open Library',
           sourceClass: 'source-openlib',
-          url: `https://openlibrary.org${book.key}`,
+          url: https://openlibrary.org${book.key},
           meta: { type: 'Book' }
         }));
-      } catch { return []; }
+      } catch (error) {
+        console.error('Open Library API error:', error);
+        return [];
+      }
     }
   },
+  
   dictionary: {
     name: 'Dictionary',
     class: 'source-dictionary',
     search: async (query) => {
       try {
-        const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(query)}`);
-        if (!res.ok) return [];
-        const data = await res.json();
+        const response = await fetch(
+          https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(query)}
+        );
+        if (!response.ok) return [];
+        
+        const data = await response.json();
         return data.map(entry => ({
           title: entry.word,
-          excerpt: entry.meanings?.map(m => `(${m.partOfSpeech}) ${m.definitions?.[0]?.definition}`).join(' · ') || '',
+          excerpt: entry.meanings?.map(m => 
+            (${m.partOfSpeech}) ${m.definitions?.[0]?.definition}
+          ).join(' · ') || '',
           source: 'Dictionary',
           sourceClass: 'source-dictionary',
           url: entry.sourceUrls?.[0],
           meta: { type: 'Definition', phonetic: entry.phonetic }
         }));
-      } catch { return []; }
+      } catch (error) {
+        console.error('Dictionary API error:', error);
+        return [];
+      }
     }
   },
+  
   nasa: {
     name: 'NASA',
     class: 'source-nasa',
     search: async (query) => {
       try {
-        const res = await fetch(`https://images-api.nasa.gov/search?q=${encodeURIComponent(query)}&media_type=image`);
-        if (!res.ok) return [];
-        const data = await res.json();
+        const response = await fetch(
+          https://images-api.nasa.gov/search?q=${encodeURIComponent(query)}&media_type=image
+        );
+        if (!response.ok) return [];
+        
+        const data = await response.json();
         return (data.collection?.items || []).slice(0, 5).map(item => ({
           title: item.data?.[0]?.title || 'Untitled',
           excerpt: item.data?.[0]?.description?.substring(0, 200) || '',
@@ -71,7 +97,10 @@ export const apiConfigs = {
           url: item.links?.[0]?.href,
           meta: { type: 'Image', date: item.data?.[0]?.date_created?.split('T')[0] }
         }));
-      } catch { return []; }
+      } catch (error) {
+        console.error('NASA API error:', error);
+        return [];
+      }
     }
   }
 };
@@ -87,14 +116,13 @@ export function initSearch() {
     });
   });
 
-  const input = document.getElementById('searchInput');
-  input?.addEventListener('keypress', e => {
+  document.getElementById('searchInput').addEventListener('keypress', (e) => {
     if (e.key === 'Enter') performSearch();
   });
 }
 
 export async function performSearch() {
-  const query = document.getElementById('searchInput')?.value.trim();
+  const query = document.getElementById('searchInput').value.trim();
   if (!query) return;
 
   const resultsSection = document.getElementById('resultsSection');
@@ -110,43 +138,63 @@ export async function performSearch() {
 
   try {
     let results = [];
+    
     if (selectedAPI === 'all') {
-      const all = await Promise.all(Object.values(apiConfigs).map(api => api.search(query).catch(() => [])));
-      results = all.flat();
+      const promises = Object.values(apiConfigs).map(api => 
+        api.search(query).catch(() => [])
+      );
+      const allResults = await Promise.all(promises);
+      results = allResults.flat();
     } else if (apiConfigs[selectedAPI]) {
       results = await apiConfigs[selectedAPI].search(query);
     }
 
     loading.classList.remove('active');
-    resultsCount.textContent = `${results.length} result${results.length !== 1 ? 's' : ''}`;
+    resultsCount.textContent = ${results.length} result${results.length !== 1 ? 's' : ''};
 
-    if (!results.length) {
-      resultsGrid.innerHTML = `<div style="text-align:center;padding:2rem;color:var(--text-muted);"><p>No results found.</p></div>`;
+    if (results.length === 0) {
+      resultsGrid.innerHTML = 
+        <div style="text-align: center; padding: 2rem; color: var(--text-muted);">
+          <p>No results found. Try a different search term or source.</p>
+        </div>
+      ;
       return;
     }
 
-    results.forEach((res, i) => {
+    results.forEach((result, index) => {
       const card = document.createElement('div');
       card.className = 'result-card';
-      card.style.animationDelay = `${i * 0.08}s`;
-      card.innerHTML = `
-        <div class="result-source"><span class="source-dot ${res.sourceClass}"></span>${res.source}</div>
-        <h3 class="result-title">${res.title}</h3>
-        <p class="result-excerpt">${res.excerpt}</p>
-        <div class="result-meta">
-          <span>${res.meta?.type || 'Result'}</span>
-          ${res.meta?.phonetic ? `<span>${res.meta.phonetic}</span>` : ''}
-          ${res.meta?.date ? `<span>${res.meta.date}</span>` : ''}
+      card.style.animationDelay = ${index * 0.1}s;
+      card.innerHTML = 
+        <div class="result-source">
+          <span class="source-dot ${result.sourceClass}"></span>
+          ${result.source}
         </div>
-        <button class="bookmark-btn" onclick="event.stopPropagation(); window.addBookmark(${JSON.stringify(res).replace(/"/g,'&quot;')})">⭐</button>
-      `;
-      card.onclick = () => res.url && window.open(res.url, '_blank');
+        <h3 class="result-title">${result.title}</h3>
+        <p class="result-excerpt">${result.excerpt}</p>
+        <div class="result-meta">
+          <span>${result.meta?.type || 'Result'}</span>
+          ${result.meta?.phonetic ? <span>${result.meta.phonetic}</span> : ''}
+          ${result.meta?.date ? <span>${result.meta.date}</span> : ''}
+        </div>
+        <button class="bookmark-btn" onclick="event.stopPropagation(); window.addBookmark(${JSON.stringify(result).replace(/"/g, '&quot;')})">⭐</button>
+      ;
+      card.onclick = () => {
+        if (result.url) window.open(result.url, '_blank');
+      };
       resultsGrid.appendChild(card);
     });
+    
+    if (typeof window.addToSearchHistory === 'function') {
+      window.addToSearchHistory(query, results.length);
+    }
 
-    if (typeof window.addToSearchHistory === 'function') window.addToSearchHistory(query, results.length);
-  } catch {
+  } catch (error) {
     loading.classList.remove('active');
-    resultsGrid.innerHTML = `<div style="text-align:center;padding:2rem;color:var(--text-muted);"><p>Something went wrong. Please try again.</p></div>`;
+    resultsGrid.innerHTML = 
+      <div style="text-align: center; padding: 2rem; color: var(--text-muted);">
+        <p>Something went wrong. Please try again.</p>
+      </div>
+    ;
   }
 }
