@@ -147,7 +147,7 @@ crescent is designed to be **safe, ethical, and student-friendly**.
 
 ## 📄 License
 
-© 2025 **luvaary**  
+© 2025 **CrescentDB**  
 Licensed under the **CrescentDB Supreme Protection License (CSPL) v3.3**
 
 ---
