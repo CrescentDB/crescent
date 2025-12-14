@@ -539,21 +539,3 @@ footer a:hover::after {
   border-color: var(--accent);
   transform: rotate(90deg) scale(1.1);
 }
-
-@media (max-width: 768px) {
-  nav {
-    padding: 1rem 1.5rem;
-  }
-
-  .nav-links {
-    display: none;
-  }
-
-  .hero h1 {
-    font-size: 3rem;
-  }
-
-  .logo-text {
-    font-size: 1.25rem;
-  }
-}
