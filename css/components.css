@@ -133,6 +133,7 @@
   transition: all 0.3s ease;
   cursor: pointer;
   animation: slideUp 0.5s ease-out backwards;
+  position: relative;
 }
 
 .result-card:hover {
@@ -193,6 +194,28 @@
   margin-top: 1rem;
   font-size: 0.75rem;
   color: var(--text-muted);
+}
+
+.bookmark-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.bookmark-btn:hover {
+  background: var(--accent);
+  transform: scale(1.1);
 }
 
 .loading {
