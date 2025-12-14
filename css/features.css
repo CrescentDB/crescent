@@ -616,36 +616,3 @@ body.dark-mode .search-input,
 body.dark-mode .notes-panel textarea {
   background: rgba(26, 26, 26, 0.9);
 }
-
-@media (max-width: 1400px) {
-  .notes-panel,
-  .bookmarks-panel {
-    width: 280px;
-  }
-}
-
-@media (max-width: 1200px) {
-  .notes-panel,
-  .history-panel,
-  .bookmarks-panel {
-    display: none;
-  }
-  
-  .timer-widget {
-    bottom: 90px;
-    right: 20px;
-  }
-}
-
-@media (max-width: 768px) {
-  .timer-widget {
-    width: calc(100% - 40px);
-    left: 20px;
-    right: 20px;
-    min-width: auto;
-  }
-  
-  .timer-display {
-    font-size: 2.5rem;
-  }
-}
