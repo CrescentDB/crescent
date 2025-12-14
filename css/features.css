@@ -577,6 +577,41 @@ body.dark-mode nav {
   border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
+body.dark-mode nav:hover {
+  background: rgba(15, 15, 15, 0.98);
+}
+
+body.dark-mode .logo-text {
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+body.dark-mode .dark-mode-toggle {
+  background: rgba(30, 30, 30, 0.9);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+body.dark-mode .spotify-toggle {
+  background: rgba(30, 30, 30, 0.9);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+body.dark-mode .spotify-toggle:hover {
+  background: rgba(26, 26, 26, 0.95);
+}
+
+body.dark-mode .spotify-panel {
+  background: rgba(20, 20, 20, 0.95);
+  border-left-color: rgba(255, 255, 255, 0.12);
+}
+
+body.dark-mode .close-spotify {
+  background: rgba(30, 30, 30, 0.9);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
 body.dark-mode .search-input,
 body.dark-mode .notes-panel textarea {
   background: rgba(26, 26, 26, 0.9);
