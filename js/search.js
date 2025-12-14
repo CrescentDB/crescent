@@ -157,6 +157,106 @@ export const apiConfigs = {
         return [];
       }
     }
+  },
+  
+  arxiv: {
+    name: 'arXiv',
+    class: 'source-arxiv',
+    search: async (query) => {
+      try {
+        const response = await fetch(
+          `https://export.arxiv.org/api/query?search_query=all:${encodeURIComponent(query)}&start=0&max_results=5`
+        );
+        if (!response.ok) return [];
+        
+        const text = await response.text();
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(text, 'text/xml');
+        const entries = xml.querySelectorAll('entry');
+        
+        return Array.from(entries).map(entry => ({
+          title: entry.querySelector('title')?.textContent?.trim() || 'Untitled',
+          excerpt: entry.querySelector('summary')?.textContent?.trim()?.substring(0, 200) || '',
+          source: 'arXiv',
+          sourceClass: 'source-arxiv',
+          url: entry.querySelector('id')?.textContent?.trim(),
+          meta: { 
+            type: 'Research Paper',
+            authors: entry.querySelector('author name')?.textContent?.trim()
+          }
+        }));
+      } catch (error) {
+        console.error('arXiv API error:', error);
+        return [];
+      }
+    }
+  },
+  
+  github: {
+    name: 'GitHub',
+    class: 'source-github',
+    search: async (query) => {
+      try {
+        const response = await fetch(
+          `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}&sort=stars&per_page=5`
+        );
+        if (!response.ok) return [];
+        
+        const data = await response.json();
+        return data.items.map(repo => ({
+          title: repo.full_name,
+          excerpt: repo.description || 'No description available',
+          source: 'GitHub',
+          sourceClass: 'source-github',
+          url: repo.html_url,
+          meta: { 
+            type: 'Repository',
+            stars: `⭐ ${repo.stargazers_count}`,
+            language: repo.language
+          }
+        }));
+      } catch (error) {
+        console.error('GitHub API error:', error);
+        return [];
+      }
+    }
+  },
+  
+  youtube: {
+    name: 'YouTube',
+    class: 'source-youtube',
+    search: async (query) => {
+      try {
+        const response = await fetch(
+          `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`
+        );
+        const text = await response.text();
+        
+        const scriptMatch = text.match(/var ytInitialData = ({.+?});/);
+        if (!scriptMatch) return [];
+        
+        const data = JSON.parse(scriptMatch[1]);
+        const contents = data?.contents?.twoColumnSearchResultsRenderer?.primaryContents?.sectionListRenderer?.contents?.[0]?.itemSectionRenderer?.contents || [];
+        
+        return contents.slice(0, 5).filter(item => item.videoRenderer).map(item => {
+          const video = item.videoRenderer;
+          return {
+            title: video.title?.runs?.[0]?.text || 'Untitled',
+            excerpt: video.descriptionSnippet?.runs?.map(r => r.text).join('') || 'No description',
+            source: 'YouTube',
+            sourceClass: 'source-youtube',
+            url: `https://www.youtube.com/watch?v=${video.videoId}`,
+            meta: { 
+              type: 'Video',
+              views: video.viewCountText?.simpleText
+            }
+          };
+        });
+      } catch (error) {
+        console.error('YouTube API error:', error);
+        return [];
+      }
+    }
   }
 };
 
