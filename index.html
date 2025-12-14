@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="css/responsive.css">
   
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#c4a87c">
 </head>
 <body>
   <div class="orb orb-1"></div>
@@ -44,9 +46,16 @@
     <div class="nav-actions">
       <button class="nav-btn" id="shortcutsHelp" title="Keyboard Shortcuts (?)">⌨️</button>
       <button class="nav-btn" id="focusModeToggle" title="Focus Mode">🎯</button>
+      <button class="nav-btn" id="themesToggle" title="Themes">🎨</button>
       <button class="dark-mode-toggle" id="darkModeToggle">🌙</button>
     </div>
   </nav>
+
+  <div class="themes-panel" id="themesPanel">
+    <button class="close-panel" onclick="document.getElementById('themesPanel').classList.remove('open')">×</button>
+    <h3>🎨 Themes</h3>
+    <div id="themeSelector"></div>
+  </div>
 
   <div class="spotify-tab">
     <button class="spotify-toggle" id="spotifyToggle">
@@ -93,6 +102,47 @@
     <button class="clear-history-btn" onclick="clearHistory()">Clear History</button>
   </div>
 
+  <div class="analytics-panel" id="analyticsPanel">
+    <h3>📊 Study Analytics</h3>
+    
+    <div class="session-tracker">
+      <div class="session-time" id="sessionTime">00:00:00</div>
+      <div class="session-controls">
+        <button id="startSession">Start Session</button>
+        <button id="stopSession" class="hidden">Stop Session</button>
+      </div>
+    </div>
+    
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value" id="totalStudyTime">0h 0m</div>
+        <div class="stat-label">Total Time</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="totalSearches">0</div>
+        <div class="stat-label">Searches</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="avgSession">0m</div>
+        <div class="stat-label">Avg Session</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="studyStreak">0</div>
+        <div class="stat-label">Day Streak</div>
+      </div>
+    </div>
+    
+    <div class="source-chart-container">
+      <h4>Most Used Sources</h4>
+      <div id="sourceChart"></div>
+    </div>
+    
+    <div class="analytics-actions">
+      <button onclick="exportAnalytics()">Export</button>
+      <button onclick="resetAnalytics()">Reset</button>
+    </div>
+  </div>
+
   <div class="bookmarks-panel" id="bookmarksPanel">
     <h3>Bookmarks</h3>
     <div id="bookmarksList"></div>
@@ -114,6 +164,11 @@
         <button onclick="flipCard()">Flip</button>
         <button onclick="nextCard()">→</button>
       </div>
+      <div class="flashcard-rating">
+        <button onclick="rateCard('hard')" class="rate-hard">Hard</button>
+        <button onclick="rateCard('good')" class="rate-good">Good</button>
+        <button onclick="rateCard('easy')" class="rate-easy">Easy</button>
+      </div>
     </div>
     
     <div class="flashcard-creator">
@@ -123,6 +178,12 @@
     </div>
     
     <div class="flashcards-list" id="flashcardsList"></div>
+  </div>
+
+  <div class="reading-panel" id="readingPanel">
+    <h3>📖 Reading List</h3>
+    <div id="readingListItems"></div>
+    <button class="clear-reading-btn" onclick="clearReadingList()">Clear All</button>
   </div>
 
   <div class="spotify-panel" id="spotifyPanel">
