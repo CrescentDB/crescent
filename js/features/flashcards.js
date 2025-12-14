@@ -192,3 +192,5 @@ window.selectFlashcard = (index) => {
   if (cardElement) cardElement.classList.remove('flipped');
   updateCardContent();
 };
+window.rateCard = rateCard;
+window.getDueCards = getDueCards;
