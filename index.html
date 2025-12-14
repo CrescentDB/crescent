@@ -4,39 +4,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Crescent - Calm Search for Students</title>
-
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-
+  
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/features.css">
-
-  <link rel="icon" href="assets/favicon.ico">
+  
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
 </head>
 <body>
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
 
-<nav>
-  <a href="#" class="logo">
-    <div class="logo-icon">
-      <img src="assets/icon.svg" alt="Crescent Logo" width="32" height="32">
+  <nav>
+    <a href="#" class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 32 32">
+          <path class="crescent-moon" d="M20 4a12 12 0 1 0 0 24 12 12 0 0 1 0-24z"/>
+        </svg>
+      </div>
+      <span class="logo-text">CRESCENT</span>
+    </a>
+    
+    <div class="nav-center">
+      <div class="clock" id="clock">--:--</div>
     </div>
-    <span class="logo-text">CRESCENT</span>
-  </a>
-  <div class="nav-center">
-    <div class="clock" id="clock">--:--</div>
-  </div>
-  <ul class="nav-links">
-    <li><a href="#search">Search</a></li>
-    <li><a href="https://github.com" target="_blank">GitHub</a></li>
-    <li><a href="#about">About</a></li>
-  </ul>
-  <button class="dark-mode-toggle" id="darkModeToggle">🌙</button>
-</nav>
+    
+    <ul class="nav-links">
+      <li><a href="#search">Search</a></li>
+      <li><a href="https://github.com" target="_blank">GitHub</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    
+    <button class="dark-mode-toggle" id="darkModeToggle">🌙</button>
+  </nav>
 
   <div class="spotify-tab">
     <button class="spotify-toggle" id="spotifyToggle">
@@ -98,7 +103,13 @@
 
     <div class="search-container">
       <div class="search-box">
-        <input type="text" class="search-input" id="searchInput" placeholder="What would you like to explore?" autocomplete="off">
+        <input 
+          type="text" 
+          class="search-input" 
+          id="searchInput"
+          placeholder="What would you like to explore?"
+          autocomplete="off"
+        >
         <button class="search-btn" id="searchBtn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="11" cy="11" r="8"/>
@@ -106,7 +117,7 @@
           </svg>
         </button>
       </div>
-
+      
       <div class="api-categories">
         <button class="api-chip active" data-api="all">All</button>
         <button class="api-chip" data-api="wikipedia">Wikipedia</button>
@@ -121,11 +132,11 @@
         <h2>Results</h2>
         <span class="results-count" id="resultsCount">0 results</span>
       </div>
-
+      
       <div class="loading" id="loading">
         <div class="loader"></div>
       </div>
-
+      
       <div class="results-grid" id="resultsGrid"></div>
     </section>
 
