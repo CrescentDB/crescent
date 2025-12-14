@@ -64,4 +64,19 @@ async function loadFeatures() {
     const { initMath } = await import('./features/math.js');
     initMath();
   } catch (e) {}
+  
+  try {
+    const { initFlashcards } = await import('./features/flashcards.js');
+    initFlashcards();
+  } catch (e) {}
+  
+  try {
+    const { initShortcuts } = await import('./features/shortcuts.js');
+    initShortcuts();
+  } catch (e) {}
+  
+  try {
+    const { initFocusMode } = await import('./features/focus.js');
+    initFocusMode();
+  } catch (e) {}
 }
