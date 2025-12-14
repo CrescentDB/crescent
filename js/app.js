@@ -14,6 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
   fadeInPage();
   
   loadFeatures();
+  
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(() => console.log('Service Worker registered'))
+      .catch(err => console.log('Service Worker registration failed:', err));
+  }
 });
 
 function setupEventListeners() {
@@ -31,6 +37,13 @@ function setupEventListeners() {
   
   if (closeSpotify) {
     closeSpotify.addEventListener('click', toggleSpotify);
+  }
+  
+  const themesToggle = document.getElementById('themesToggle');
+  if (themesToggle) {
+    themesToggle.addEventListener('click', () => {
+      document.getElementById('themesPanel')?.classList.toggle('open');
+    });
   }
 }
 
@@ -78,5 +91,25 @@ async function loadFeatures() {
   try {
     const { initFocusMode } = await import('./features/focus.js');
     initFocusMode();
+  } catch (e) {}
+  
+  try {
+    const { initAnalytics } = await import('./features/analytics.js');
+    initAnalytics();
+  } catch (e) {}
+  
+  try {
+    const { initThemes } = await import('./features/themes.js');
+    initThemes();
+  } catch (e) {}
+  
+  try {
+    const { initTags } = await import('./features/tags.js');
+    initTags();
+  } catch (e) {}
+  
+  try {
+    const { initReadingList } = await import('./features/reading.js');
+    initReadingList();
   } catch (e) {}
 }
