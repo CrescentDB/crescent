@@ -264,6 +264,9 @@
 .source-nasa { background: #0b3d91; }
 .source-weather { background: #4fc3f7; }
 .source-news { background: #e57373; }
+.source-arxiv { background: #b31b1b; }
+.source-github { background: #333333; }
+.source-youtube { background: #ff0000; }
 
 .result-title {
   font-family: 'Cormorant Garamond', serif;
