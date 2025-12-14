@@ -46,6 +46,25 @@ export function clearNotes() {
   }
 }
 
+export function exportNotes() {
+  const textarea = document.getElementById('notesTextarea');
+  if (!textarea || !textarea.value.trim()) {
+    alert('No notes to export');
+    return;
+  }
+  
+  const notes = textarea.value;
+  const blob = new Blob([notes], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `crescent-notes-${new Date().toISOString().split('T')[0]}.txt`;
+  a.click();
+  URL.revokeObjectURL(url);
+  
+  showNotification('Notes exported!');
+}
+
 function showNotification(message) {
   const notification = document.createElement('div');
   notification.className = 'notification';
@@ -65,3 +84,4 @@ function showNotification(message) {
 window.loadNotes = loadNotes;
 window.saveNotes = saveNotes;
 window.clearNotes = clearNotes;
+window.exportNotes = exportNotes;
